@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic reset and font application */
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Styling for the logo image */
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        /* Styling for the logo text */
+        .logo span {
+            font-size: 24px;
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Styling for the bell icon */
+        .header-icons .fa-bell {
+            font-size: 24px;
+            color: #555;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        /* Styling for the red notification dot */
+        .notification-dot {
+            position: absolute;
+            top: 0px;
+            right: 35px;
+            width: 8px;
+            height: 8px;
+            background-color: #dc3545;
+            border-radius: 50%;
+        }
+
+        /* Styling for the profile picture */
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #28a745;
+        }
+
+        /* Main content container */
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        /* Styling for each panel card */
+        .panel {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            padding: 20px;
+        }
+
+        /* Styling for panel titles */
+        .panel-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Grid layout for icons within panels */
+        .panel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        /* Styling for individual icon items (now buttons) */
+        .icon-item {
+            /* Reset default button styles */
+            background: none;
+            border: none;
+            outline: none; /* Remove focus outline */
+            font-family: 'Hind Siliguri', sans-serif; /* Ensure font is applied to button text */
+            color: inherit; /* Inherit text color from body */
+            text-align: center; /* Center text within the button */
+
+            /* Existing styles for layout and appearance */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Hover effect for icon items */
+        .icon-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* Styling for the circular background of icons */
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            background-color: #e6f7ed;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        /* Styling for the icons themselves */
+        .icon-circle i {
+            font-size: 28px;
+            color: #28a745;
+        }
+
+        /* Styling for the text below the icons */
+        .icon-item span {
+            font-size: 15px;
+            color: #555;
+            font-weight: 500;
+            /* Ensure text wraps correctly if long */
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        /* Media queries for responsiveness */
+
+        /* Tablets and larger phones */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px;
+            }
+            .logo span {
+                font-size: 20px;
+            }
+            .header-icons .fa-bell {
+                font-size: 20px;
+                margin-right: 15px;
+            }
+            .profile-pic {
+                width: 35px;
+                height: 35px;
+            }
+            .container {
+                padding: 15px;
+            }
+            .panel-title {
+                font-size: 18px;
+            }
+            .panel-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 15px;
+            }
+            .icon-circle {
+                width: 50px;
+                height: 50px;
+            }
+            .icon-circle i {
+                font-size: 24px;
+            }
+            .icon-item span {
+                font-size: 14px;
+            }
+        }
+
+        /* Small phones */
+        @media (max-width: 480px) {
+            .header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .header-icons {
+                margin-top: 10px;
+            }
+            .panel-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="https://placehold.co/40x40/28a745/ffffff?text=Logo" alt="Mahamaya Logo">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="panel">
+            <div class="panel-title">মেম্বারশিপ প্যানেল</div>
+            <div class="panel-grid">
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <span>সদস্য তালিকা</span>
+                </button>
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <span>কমিটির তালিকা</span>
+                </button>
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <span>অভিযোগের তালিকা</span>
+                </button>
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <span>মেম্বারশিপ বাতিল আবেদন</span>
+                </button>
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <span>রক্ত দানকারীর তালিকা</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-title">হিসাব প্যানেল</div>
+            <div class="panel-grid">
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <span>মাসিক হিসাব</span>
+                </button>
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span>বাৎসরিক হিসাব</span>
+                </button>
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <span>ডোনেশনের পরিমাণ</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-title">অনুষ্ঠানের হিসাব প্যানেল</div>
+            <div class="panel-grid">
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <span>জমার বিবরণ</span>
+                </button>
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <span>খরচের বিবরণ</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-title">ট্যাকনিক্যাল প্যানেল</div>
+            <div class="panel-grid">
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <span>ইউজার একাউন্ট খুলুন</span>
+                </button>
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <span>অ্যাডমিন একাউন্ট খুলুন</span>
+                </button>
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <span>চ্যাট সাপোর্ট</span>
+                </button>
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <span>ডকুমেন্টস</span>
+                </button>
+                <button class="icon-item">
+                    <div class="icon-circle">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <span>তথ্য ও শর্তাবলী</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
